@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمة الشحن الذكية | Smart Shipping Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span class="s1">S</span><span class="s2">S</span>
+            </div>
+            <p class="preloader-text">جاري التحميل...</p>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+963 11 123 4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@smartshipping.sy</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>دمشق - المنطقة الحرة</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <span class="s1">S</span><span class="s2">S</span>
+                    <div class="logo-text">
+                        <span class="logo-title">Smart Shipping</span>
+                        <span class="logo-subtitle">خدمة الشحن الذكية</span>
+                    </div>
+                </a>
+                
+                <nav>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#home" class="active">الرئيسية</a></li>
+                        <li><a href="#about">من نحن</a></li>
+                        <li><a href="#services">خدماتنا</a></li>
+                        <li><a href="#locations">مواقعنا</a></li>
+                        <li><a href="#gallery">معرض الصور</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-buttons">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="بحث...">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <a href="#contact" class="btn btn-primary">احصل على عرض سعر</a>
+                    <button class="btn btn-outline" id="authBtn" onclick="openModal('authModal')">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="mobile-menu-btn" onclick="toggleMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider" id="home">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1920" alt="سفينة شحن" class="slide-image">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-badge">شريكك الموثوق في الشحن الدولي</div>
+                <h1 class="slide-title">نقل بضائعك إلى <span>أي مكان في العالم</span></h1>
+                <p class="slide-description">نوفر لك أفضل حلول الشحن البحري والجوي والبري بأعلى معايير الجودة والسرعة والأمان. تغطية شاملة لأوروبا والشرق الأقصى والشرق الأوسط</p>
+                <div class="slide-buttons">
+                    <a href="#services" class="btn btn-primary btn-lg">اكتشف خدماتنا</a>
+                    <a href="#contact" class="btn btn-white btn-lg">تواصل معنا</a>
+                </div>
+                <div class="slide-features">
+                    <div class="slide-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>تغطية عالمية</span>
+                    </div>
+                    <div class="slide-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>تتبع مباشر</span>
+                    </div>
+                    <div class="slide-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>أسعار تنافسية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920" alt="حاويات شحن" class="slide-image">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-badge">خبرة واسعة في الشحن البحري</div>
+                <h1 class="slide-title">شحن الحاويات <span>FCL & LCL</span></h1>
+                <p class="slide-description">خدمات شحن بحري متكاملة من الباب إلى الباب. نوفر جميع أنواع الحاويات: 20 قدم، 40 قدم، 40HQ، حاويات مبردة وحاويات مفتوحة السقف</p>
+                <div class="slide-buttons">
+                    <a href="#services" class="btn btn-primary btn-lg">الشحن البحري</a>
+                    <a href="#contact" class="btn btn-white btn-lg">احصل على عرض</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1920" alt="طائرة شحن" class="slide-image">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-badge">أسرع وسيلة لنقل البضائع</div>
+                <h1 class="slide-title">شحن جوي <span>سريع وآمن</span></h1>
+                <p class="slide-description">رحلات يومية من معظم مطارات العالم مع خدمات Door to Door و Door to Airport. نقل آمن للبضائع الحساسة والقابلة للكسر</p>
+                <div class="slide-buttons">
+                    <a href="#services" class="btn btn-primary btn-lg">الشحن الجوي</a>
+                    <a href="#contact" class="btn btn-white btn-lg">اتصل الآن</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-nav">
+            <div class="slider-dot active" onclick="goToSlide(0)"></div>
+            <div class="slider-dot" onclick="goToSlide(1)"></div>
+            <div class="slider-dot" onclick="goToSlide(2)"></div>
+        </div>
+
+        <div class="slider-arrows">
+            <button class="slider-arrow" onclick="prevSlide()"><i class="fas fa-chevron-right"></i></button>
+            <button class="slider-arrow" onclick="nextSlide()"><i class="fas fa-chevron-left"></i></button>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <section class="features-bar">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>الشحن البحري</h4>
+                        <p>FCL & LCL لجميع الموانئ</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>الشحن الجوي</h4>
+                        <p>رحلات يومية عالمية</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>الشحن البري</h4>
+                        <p>تغطية إقليمية شاملة</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>التخليص الجمركي</h4>
+                        <p>إجراءات سريعة ومضمونة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-images">
+                    <div class="about-img-main">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600" alt="عن الشركة">
+                    </div>
+                    <div class="about-img-secondary">
+                        <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=400" alt="سفينة شحن">
+                    </div>
+                    <div class="experience-badge">
+                        <i class="fas fa-award"></i>
+                        <span class="exp-number">15+</span>
+                        <span class="exp-text">سنة خبرة</span>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <div class="section-label">من نحن</div>
+                    <h2 class="section-title">شركة رائدة في <span>الشحن الدولي</span> والخدمات اللوجستية</h2>
+                    <p class="about-text">خدمة الشحن الذكية Smart Shipping Services هي شركة متخصصة في تقديم حلول الشحن والخدمات اللوجستية المتكاملة. نعمل من مقراتنا في دمشق ودبي والأردن وبيروت لتلبية احتياجات عملائنا.</p>
+                    <p class="about-text">نقدم تغطية شاملة لمناطق أوروبا والشرق الأقصى والشرق الأوسط، مع شبكة واسعة من الشركاء حول العالم لضمان وصول بضائعك بأمان وفي الوقت المحدد.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <h5>تغطية عالمية</h5>
+                                <p>أوروبا، الشرق الأقصى، الشرق الأوسط</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <div>
+                                <h5>مستودعات دولية</h5>
+                                <p>سوريا، لبنان، الأردن، دبي، الصين، إيطاليا، ألمانيا</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h5>شراكات قوية</h5>
+                                <p>علاقات طويلة الأمد مع شركات الشحن العالمية</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div>
+                                <h5>دعم متواصل</h5>
+                                <p>فريق دعم متخصص على مدار الساعة</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-buttons">
+                        <a href="#contact" class="btn btn-primary">تواصل معنا</a>
+                        <a href="#services" class="btn btn-outline-dark">خدماتنا</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-globe-americas"></i></div>
+                    <div class="stat-number"><span class="counter" data-target="50">0</span>+</div>
+                    <div class="stat-label">دولة نخدمها</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-box"></i></div>
+                    <div class="stat-number"><span class="counter" data-target="25000">0</span>+</div>
+                    <div class="stat-label">شحنة سنوياً</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number"><span class="counter" data-target="3000">0</span>+</div>
+                    <div class="stat-label">عميل راضٍ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-warehouse"></i></div>
+                    <div class="stat-number"><span class="counter" data-target="7">0</span></div>
+                    <div class="stat-label">مستودعات دولية</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">خدماتنا</div>
+                <h2 class="section-title">حلول شحن <span>متكاملة</span></h2>
+                <p class="section-description">نقدم مجموعة شاملة من خدمات الشحن والخدمات اللوجستية لتلبية جميع احتياجاتك</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Sea Freight -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=600" alt="الشحن البحري">
+                        <div class="service-badge">الأكثر طلباً</div>
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon"><i class="fas fa-ship"></i></div>
+                        <h3 class="service-title">الشحن البحري</h3>
+                        <p class="service-text">شحن الحاويات الكاملة FCL والشحن الجزئي LCL إلى جميع موانئ العالم مع خدمات من الباب إلى الباب</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> حاويات 20 قدم، 40 قدم، 40HQ</li>
+                            <li><i class="fas fa-check"></i> حاويات مبردة ومفتوحة السقف</li>
+                            <li><i class="fas fa-check"></i> تخليص جمركي في اللاذقية وطرطوس</li>
+                        </ul>
+                        <a href="#contact" class="service-link">احصل على عرض سعر <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+
+                <!-- Air Freight -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600" alt="الشحن الجوي">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon"><i class="fas fa-plane"></i></div>
+                        <h3 class="service-title">الشحن الجوي</h3>
+                        <p class="service-text">أسرع وسيلة لنقل البضائع مع رحلات يومية من معظم مطارات العالم وخدمات متعددة</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> خدمة Door to Door</li>
+                            <li><i class="fas fa-check"></i> خدمة Door to Airport</li>
+                            <li><i class="fas fa-check"></i> نقل البضائع الحساسة والقابلة للكسر</li>
+                        </ul>
+                        <a href="#contact" class="service-link">احصل على عرض سعر <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+
+                <!-- Land Freight -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600" alt="الشحن البري">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon"><i class="fas fa-truck"></i></div>
+                        <h3 class="service-title">الشحن البري</h3>
+                        <p class="service-text">أسطول كبير من الشاحنات والمقطورات والبيك أب مع تغطية شاملة للمنطقة</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> تغطية سوريا ولبنان والأردن والخليج</li>
+                            <li><i class="fas fa-check"></i> ضمان النقل الآمن للبضائع</li>
+                            <li><i class="fas fa-check"></i> أسطول حديث ومتنوع</li>
+                        </ul>
+                        <a href="#contact" class="service-link">احصل على عرض سعر <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+
+                <!-- Warehousing -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=600" alt="المستودعات">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon"><i class="fas fa-warehouse"></i></div>
+                        <h3 class="service-title">خدمات التخزين</h3>
+                        <p class="service-text">مستودعات حديثة في عدة دول لتخزين وإدارة سلسلة التوريد بالكامل</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> مستودعات في 7 دول</li>
+                            <li><i class="fas fa-check"></i> إدارة المخزون</li>
+                            <li><i class="fas fa-check"></i> خدمات التعبئة والتغليف</li>
+                        </ul>
+                        <a href="#contact" class="service-link">احصل على عرض سعر <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+
+                <!-- Customs Clearance - الصورة المعدلة -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" alt="التخليص الجمركي">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+                        <h3 class="service-title">التخليص الجمركي</h3>
+                        <p class="service-text">خدمات تخليص جمركي في الموانئ والمطارات والحدود البرية مع فريق متخصص</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> موانئ اللاذقية وطرطوس وبيروت والعقبة</li>
+                            <li><i class="fas fa-check"></i> فريق مختص بالقوانين الجمركية</li>
+                            <li><i class="fas fa-check"></i> إجراءات سريعة ومضمونة</li>
+                        </ul>
+                        <a href="#contact" class="service-link">احصل على عرض سعر <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+
+                <!-- Additional Services -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1586528116493-da79c9d0c3ee?w=600" alt="خدمات إضافية">
+                    </div>
+                    <div class="service-content">
+                        <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                        <h3 class="service-title">خدمات إضافية</h3>
+                        <p class="service-text">مجموعة متنوعة من الخدمات الإضافية لتلبية جميع احتياجات الشحن</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> النقل متعدد الوسائط</li>
+                            <li><i class="fas fa-check"></i> شحن البضائع الخطرة</li>
+                            <li><i class="fas fa-check"></i> تأمين الشحنات وتتبعها</li>
+                        </ul>
+                        <a href="#contact" class="service-link">احصل على عرض سعر <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Container Types -->
+    <section class="section containers-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">أنواع الحاويات</div>
+                <h2 class="section-title">حاويات <span>متنوعة</span> لجميع الاحتياجات</h2>
+            </div>
+
+            <div class="containers-grid">
+                <div class="container-card">
+                    <div class="container-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h4>20 قدم</h4>
+                    <p>Standard Container</p>
+                </div>
+                <div class="container-card">
+                    <div class="container-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h4>40 قدم</h4>
+                    <p>Standard Container</p>
+                </div>
+                <div class="container-card">
+                    <div class="container-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h4>40HQ</h4>
+                    <p>High Cube Container</p>
+                </div>
+                <div class="container-card">
+                    <div class="container-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h4>حاويات مبردة</h4>
+                    <p>Reefer Container</p>
+                </div>
+                <div class="container-card">
+                    <div class="container-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h4>مفتوحة السقف</h4>
+                    <p>Open Top Container</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section class="section locations-section" id="locations">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">مواقعنا</div>
+                <h2 class="section-title">تواجد <span>عالمي</span></h2>
+                <p class="section-description">نعمل من عدة مواقع استراتيجية لخدمتك أينما كنت</p>
+            </div>
+
+            <div class="locations-grid">
+                <div class="location-category">
+                    <h3><i class="fas fa-building"></i> مكاتبنا</h3>
+                    <div class="location-cards">
+                        <div class="location-card">
+                            <div class="location-flag">🇸🇾</div>
+                            <h4>دمشق</h4>
+                            <p>المنطقة الحرة</p>
+                            <span class="location-tag">المقر الرئيسي</span>
+                        </div>
+                        <div class="location-card">
+                            <div class="location-flag">🇦🇪</div>
+                            <h4>دبي</h4>
+                            <p>الإمارات العربية</p>
+                        </div>
+                        <div class="location-card">
+                            <div class="location-flag">🇯🇴</div>
+                            <h4>الأردن</h4>
+                            <p>عمّان</p>
+                        </div>
+                        <div class="location-card">
+                            <div class="location-flag">🇱🇧</div>
+                            <h4>بيروت</h4>
+                            <p>لبنان</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-category">
+                    <h3><i class="fas fa-anchor"></i> موانئ التخليص</h3>
+                    <div class="location-cards">
+                        <div class="location-card">
+                            <div class="location-icon"><i class="fas fa-anchor"></i></div>
+                            <h4>اللاذقية</h4>
+                            <p>سوريا</p>
+                        </div>
+                        <div class="location-card">
+                            <div class="location-icon"><i class="fas fa-anchor"></i></div>
+                            <h4>طرطوس</h4>
+                            <p>سوريا</p>
+                        </div>
+                        <div class="location-card">
+                            <div class="location-icon"><i class="fas fa-anchor"></i></div>
+                            <h4>بيروت</h4>
+                            <p>لبنان</p>
+                        </div>
+                        <div class="location-card">
+                            <div class="location-icon"><i class="fas fa-anchor"></i></div>
+                            <h4>العقبة</h4>
+                            <p>الأردن</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-category full-width">
+                    <h3><i class="fas fa-warehouse"></i> مستودعاتنا الدولية</h3>
+                    <div class="warehouses-grid">
+                        <div class="warehouse-card">
+                            <span class="warehouse-flag">🇸🇾</span>
+                            <span>سوريا</span>
+                        </div>
+                        <div class="warehouse-card">
+                            <span class="warehouse-flag">🇱🇧</span>
+                            <span>لبنان</span>
+                        </div>
+                        <div class="warehouse-card">
+                            <span class="warehouse-flag">🇯🇴</span>
+                            <span>الأردن</span>
+                        </div>
+                        <div class="warehouse-card">
+                            <span class="warehouse-flag">🇦🇪</span>
+                            <span>دبي</span>
+                        </div>
+                        <div class="warehouse-card">
+                            <span class="warehouse-flag">🇨🇳</span>
+                            <span>الصين</span>
+                        </div>
+                        <div class="warehouse-card">
+                            <span class="warehouse-flag">🇮🇹</span>
+                            <span>إيطاليا</span>
+                        </div>
+                        <div class="warehouse-card">
+                            <span class="warehouse-flag">🇩🇪</span>
+                            <span>ألمانيا</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coverage-section">
+                <h3>مناطق التغطية</h3>
+                <div class="coverage-areas">
+                    <div class="coverage-area">
+                        <i class="fas fa-globe-europe"></i>
+                        <h4>أوروبا</h4>
+                        <p>تغطية شاملة لجميع الدول الأوروبية</p>
+                    </div>
+                    <div class="coverage-area">
+                        <i class="fas fa-globe-asia"></i>
+                        <h4>الشرق الأقصى</h4>
+                        <p>الصين، اليابان، كوريا وجنوب شرق آسيا</p>
+                    </div>
+                    <div class="coverage-area">
+                        <i class="fas fa-globe-africa"></i>
+                        <h4>الشرق الأوسط</h4>
+                        <p>دول الخليج وشمال أفريقيا</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section why-us-section">
+        <div class="container">
+            <div class="why-us-grid">
+                <div class="why-us-content">
+                    <div class="section-label">لماذا نحن</div>
+                    <h2 class="section-title">لماذا تختار <span>خدمة الشحن الذكية</span>؟</h2>
+                    <p class="why-us-text">نسعى دائماً لتقديم أفضل خدمات الشحن والخدمات اللوجستية بأعلى معايير الجودة وبأسعار تنافسية</p>
+                    
+                    <div class="why-us-items">
+                        <div class="why-us-item">
+                            <div class="why-us-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <div>
+                                <h4>شحن سريع وآمن</h4>
+                                <p>نضمن وصول بضائعك في الوقت المحدد وبحالة ممتازة</p>
+                            </div>
+                        </div>
+                        <div class="why-us-item">
+                            <div class="why-us-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div>
+                                <h4>أسعار تنافسية</h4>
+                                <p>نقدم أفضل الأسعار في السوق مع الحفاظ على الجودة</p>
+                            </div>
+                        </div>
+                        <div class="why-us-item">
+                            <div class="why-us-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div>
+                                <h4>تتبع مباشر</h4>
+                                <p>تتبع شحناتك لحظة بلحظة عبر نظام التتبع المتطور</p>
+                            </div>
+                        </div>
+                        <div class="why-us-item">
+                            <div class="why-us-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div>
+                                <h4>دعم على مدار الساعة</h4>
+                                <p>فريق دعم متخصص متاح 24/7 لمساعدتك</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why-us-image">
+                    <img src="https://images.unsplash.com/photo-1586528116022-f4b1b9c19e57?w=600" alt="لماذا نحن">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">معرض الصور</div>
+                <h2 class="section-title">صور من <span>عملياتنا</span></h2>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item large">
+                    <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=800" alt="سفينة شحن">
+                    <div class="gallery-overlay">
+                        <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                        <h4>سفن الشحن العملاقة</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600" alt="حاويات">
+                    <div class="gallery-overlay">
+                        <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                        <h4>حاويات الشحن</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600" alt="طائرة شحن">
+                    <div class="gallery-overlay">
+                        <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                        <h4>الشحن الجوي</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=600" alt="مستودع">
+                    <div class="gallery-overlay">
+                        <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                        <h4>المستودعات الحديثة</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600" alt="شاحنة">
+                    <div class="gallery-overlay">
+                        <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                        <h4>أسطول الشاحنات</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600" alt="ميناء">
+                    <div class="gallery-overlay">
+                        <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                        <h4>الموانئ</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">آراء عملائنا</div>
+                <h2 class="section-title">ماذا يقول <span>عملاؤنا</span></h2>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"تجربة رائعة مع خدمة الشحن الذكية، شحناتنا تصل دائماً في الوقت المحدد وبحالة ممتازة. فريق دعم متميز ومتعاون وأسعار تنافسية جداً."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="أحمد محمد">
+                            <div>
+                                <h4>أحمد محمد</h4>
+                                <span>مدير شركة استيراد</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"أفضل شركة شحن تعاملت معها في سوريا. خدمات التخليص الجمركي لديهم ممتازة ووفرت علينا الكثير من الوقت والجهد. شركاء موثوقون فعلاً."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" alt="سارة أحمد">
+                            <div>
+                                <h4>سارة أحمد</h4>
+                                <span>صاحبة متجر إلكتروني</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"نتعامل مع الشركة منذ سنوات في شحن بضائعنا من الصين. الخدمة ممتازة ونظام التتبع يعمل بشكل رائع. أنصح بهم بشدة."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100" alt="خالد العمري">
+                            <div>
+                                <h4>خالد العمري</h4>
+                                <span>مدير مشتريات</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <span class="t-dot active" onclick="goToTestimonial(0)"></span>
+                    <span class="t-dot" onclick="goToTestimonial(1)"></span>
+                    <span class="t-dot" onclick="goToTestimonial(2)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">أسئلة شائعة</div>
+                <h2 class="section-title">الأسئلة <span>المتكررة</span></h2>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>كيف يمكنني تتبع شحنتي؟</span>
+                        <div class="faq-icon"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        يمكنك تتبع شحنتك بسهولة عبر موقعنا الإلكتروني أو من خلال التواصل مع فريق الدعم. ستحصل على تحديثات فورية عن حالة شحنتك وموقعها الحالي.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>ما هي أنواع الحاويات المتوفرة لديكم؟</span>
+                        <div class="faq-icon"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        نوفر جميع أنواع الحاويات: 20 قدم، 40 قدم، 40HQ، حاويات مبردة للبضائع التي تحتاج تبريد، وحاويات مفتوحة السقف (Open Top) للبضائع كبيرة الحجم.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>ما هي مدة الشحن البحري من الصين إلى سوريا؟</span>
+                        <div class="faq-icon"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        تستغرق الشحنات البحرية من الصين إلى سوريا عادة من 25 إلى 35 يوماً حسب الميناء المغادر منه والميناء الواصل إليه، بالإضافة إلى وقت التخليص الجمركي.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>هل توفرون خدمات التأمين على الشحنات؟</span>
+                        <div class="faq-icon"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        نعم، نقدم خدمات تأمين شاملة على جميع الشحنات لحمايتها من أي أضرار أو فقدان. يمكنك اختيار مستوى التأمين المناسب لقيمة شحنتك.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>ما الفرق بين الشحن FCL و LCL؟</span>
+                        <div class="faq-icon"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        FCL (Full Container Load) يعني حجز حاوية كاملة لبضائعك فقط، وهو مناسب للشحنات الكبيرة. أما LCL (Less than Container Load) فيعني مشاركة الحاوية مع بضائع أخرى، وهو مناسب للشحنات الصغيرة.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">تواصل معنا</div>
+                <h2 class="section-title">نحن هنا <span>لمساعدتك</span></h2>
+                <p class="section-description">تواصل معنا للحصول على عرض سعر أو أي استفسار</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-wrapper">
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>المقر الرئيسي</h4>
+                            <p>دمشق - المنطقة الحرة<br>سوريا</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>+963 11 123 4567<br>+963 99 876 5432</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>info@smartshipping.sy<br>support@smartshipping.sy</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>ساعات العمل</h4>
+                            <p>السبت - الخميس: 8:00 - 17:00<br>الجمعة: مغلق</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-branches">
+                        <h4>فروعنا الأخرى</h4>
+                        <div class="branches-list">
+                            <div class="branch-item">
+                                <span class="branch-flag">🇦🇪</span>
+                                <span>دبي</span>
+                            </div>
+                            <div class="branch-item">
+                                <span class="branch-flag">🇯🇴</span>
+                                <span>الأردن</span>
+                            </div>
+                            <div class="branch-item">
+                                <span class="branch-flag">🇱🇧</span>
+                                <span>بيروت</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <div class="contact-form">
+                        <h3>احصل على عرض سعر</h3>
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>الاسم الكامل *</label>
+                                    <input type="text" class="form-control" placeholder="أدخل اسمك" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>البريد الإلكتروني *</label>
+                                    <input type="email" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>رقم الهاتف</label>
+                                    <input type="tel" class="form-control" placeholder="أدخل رقم هاتفك">
+                                </div>
+                                <div class="form-group">
+                                    <label>نوع الخدمة</label>
+                                    <select class="form-control">
+                                        <option value="">اختر الخدمة</option>
+                                        <option value="sea">شحن بحري</option>
+                                        <option value="air">شحن جوي</option>
+                                        <option value="land">شحن بري</option>
+                                        <option value="customs">تخليص جمركي</option>
+                                        <option value="warehouse">تخزين</option>
+                                        <option value="other">أخرى</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>تفاصيل الشحنة</label>
+                                <textarea class="form-control" placeholder="اكتب تفاصيل شحنتك هنا..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <i class="fas fa-paper-plane"></i> إرسال الطلب
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>هل لديك شحنة تريد إرسالها؟</h2>
+                <p>تواصل معنا الآن للحصول على أفضل عرض سعر</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-white btn-lg">احصل على عرض سعر</a>
+                    <a href="tel:+963111234567" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> اتصل الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <span class="s1">S</span><span class="s2">S</span>
+                        <div class="logo-text">
+                            <span class="logo-title">Smart Shipping</span>
+                            <span class="logo-subtitle">خدمة الشحن الذكية</span>
+                        </div>
+                    </a>
+                    <p class="footer-text">شركة رائدة في مجال الشحن الدولي والخدمات اللوجستية والتخليص الجمركي. نقدم حلولاً متكاملة لنقل بضائعك إلى أي مكان في العالم.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">من نحن</a></li>
+                        <li><a href="#services">خدماتنا</a></li>
+                        <li><a href="#locations">مواقعنا</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>خدماتنا</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">الشحن البحري</a></li>
+                        <li><a href="#services">الشحن الجوي</a></li>
+                        <li><a href="#services">الشحن البري</a></li>
+                        <li><a href="#services">التخزين</a></li>
+                        <li><a href="#services">التخليص الجمركي</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>تواصل معنا</h4>
+                    <ul class="footer-contact-list">
+                        <li><i class="fas fa-map-marker-alt"></i> دمشق - المنطقة الحرة</li>
+                        <li><i class="fas fa-phone"></i> +963 11 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> info@smartshipping.sy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 <a href="#">Smart Shipping Services</a>. جميع الحقوق محفوظة.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">سياسة الخصوصية</a>
+                    <a href="#">الشروط والأحكام</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/963991234567" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('authModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-logo">
+                <span class="s1">S</span><span class="s2">S</span>
+            </div>
+            <h3 class="modal-title">تسجيل الدخول</h3>
+
+            <div class="modal-tabs">
+                <button class="modal-tab active" onclick="switchTab('login')">دخول</button>
+                <button class="modal-tab" onclick="switchTab('register')">حساب جديد</button>
+            </div>
+
+            <div class="tab-content active" id="loginTab">
+                <div class="error-message" id="loginError">اسم المستخدم أو كلمة المرور غير صحيحة</div>
+                <div class="success-message" id="loginSuccess">تم تسجيل الدخول بنجاح!</div>
+                
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="loginUsername" placeholder="اسم المستخدم أو البريد الإلكتروني" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                    </div>
+                    <div class="remember-row">
+                        <label>
+                            <input type="checkbox"> تذكرني
+                        </label>
+                        <a href="#">نسيت كلمة المرور؟</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-content" id="registerTab">
+                <div class="error-message" id="registerError">يرجى التحقق من البيانات المدخلة</div>
+                <div class="success-message" id="registerSuccess">تم إنشاء الحساب بنجاح!</div>
+                
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="regName" placeholder="الاسم الكامل" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-user-tag"></i>
+                        <input type="text" id="regUsername" placeholder="اسم المستخدم" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="كلمة المرور" required minlength="6">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regConfirmPassword" placeholder="تأكيد كلمة المرور" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-user-plus"></i> إنشاء حساب
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Modal -->
+    <div class="modal dashboard-modal" id="dashboardModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('dashboardModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="user-welcome">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3>مرحباً، <span id="welcomeName">المستخدم</span></h3>
+                <p>لوحة التحكم الخاصة بك</p>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="dash-stat">
+                    <div class="dash-stat-number">3</div>
+                    <div class="dash-stat-label">شحنات نشطة</div>
+                </div>
+                <div class="dash-stat">
+                    <div class="dash-stat-number">12</div>
+                    <div class="dash-stat-label">شحنات مكتملة</div>
+                </div>
+                <div class="dash-stat">
+                    <div class="dash-stat-number">1</div>
+                    <div class="dash-stat-label">طلبات معلقة</div>
+                </div>
+            </div>
+
+            <div class="dashboard-actions">
+                <button class="btn btn-primary btn-full">
+                    <i class="fas fa-box"></i> تتبع شحناتي
+                </button>
+                <button class="btn btn-outline-dark btn-full" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal image-modal" id="imageModal">
+        <button class="modal-close" onclick="closeModal('imageModal')">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="modalImage" src="" alt="">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
