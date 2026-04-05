@@ -1,0 +1,3094 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shipping Services | International Freight & Logistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A1628;
+            --primary-light: #1a2744;
+            --purple: #7C3AED;
+            --purple-light: #8B5CF6;
+            --purple-dark: #5B21B6;
+            --gold: #F59E0B;
+            --gold-light: #FCD34D;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-600: #4B5563;
+            --gray-800: #1F2937;
+            --success: #10B981;
+            --danger: #EF4444;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --card-bg: #FFFFFF;
+            --border-color: #E5E7EB;
+        }
+
+        [data-theme="dark"] {
+            --primary: #0A1628;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --gray-50: #1e293b;
+            --gray-100: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.ar {
+            direction: rtl;
+            font-family: 'Cairo', 'Poppins', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--purple);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.3s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 50px;
+            height: 50px;
+            background: rgba(124, 58, 237, 0.1);
+            border-color: var(--gold);
+        }
+
+        .cursor.click {
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--purple));
+            z-index: 10000;
+            transition: width 0.1s;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0A1628, #1a1a2e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        #preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .loader-logo {
+            font-size: 6rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .loader-logo .s1 {
+            color: var(--gold);
+            animation: bounce 0.6s ease infinite alternate;
+        }
+
+        .loader-logo .s2 {
+            color: var(--purple);
+            animation: bounce 0.6s ease 0.2s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
+        }
+
+        .loader-text {
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 8px;
+            margin-bottom: 40px;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .loader-spinner::before,
+        .loader-spinner::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .loader-spinner::before {
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-top-color: var(--gold);
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-spinner::after {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border: 4px solid transparent;
+            border-bottom-color: var(--purple);
+            animation: spin 0.8s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--primary);
+            color: white;
+            padding: 10px 0;
+            font-size: 0.85rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .top-info {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .top-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .top-info span:hover {
+            color: var(--gold);
+        }
+
+        .top-info i {
+            color: var(--gold);
+        }
+
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .top-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .top-social a {
+            width: 30px;
+            height: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .top-social a:hover {
+            background: var(--purple);
+            transform: translateY(-3px) rotate(10deg);
+        }
+
+        /* Theme & Language Toggles */
+        .toggle-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .toggle-btn:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-primary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2.8rem;
+            font-weight: 900;
+            display: flex;
+        }
+
+        .logo-icon .s1 { color: var(--gold); }
+        .logo-icon .s2 { color: var(--purple); }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--purple));
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--purple);
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245,158,11,0.4);
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: white;
+        }
+
+        .btn-purple:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(124,58,237,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 10px;
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                z-index: 1001;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-btns {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 1002;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-logo">
+                <span class="s1">S</span><span class="s2">S</span>
+            </div>
+            <div class="loader-text">SMART SHIPPING SERVICES</div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-phone-alt"></i> <span data-en="011-2158810 / 011-2158820" data-ar="011-2158810 / 011-2158820">011-2158810 / 011-2158820</span></span>
+                <span><i class="fas fa-map-marker-alt"></i> <span data-en="Damascus – Free Zone" data-ar="دمشق - المنطقة الحرة">Damascus – Free Zone</span></span>
+                <span><i class="fas fa-envelope"></i> info@smartshipping.sy</span>
+            </div>
+            <div class="top-right">
+                <div class="top-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <div class="toggle-btns">
+                    <button class="toggle-btn" id="themeToggle" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="toggle-btn" id="langToggle" title="العربية">
+                        <span>AR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <span class="s1">S</span><span class="s2">S</span>
+                </div>
+                <div class="logo-text">
+                    <h1>Smart Shipping</h1>
+                    <span data-en="INTERNATIONAL FREIGHT & LOGISTICS" data-ar="الشحن الدولي والخدمات اللوجستية">INTERNATIONAL FREIGHT & LOGISTICS</span>
+                </div>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" data-en="Home" data-ar="الرئيسية">Home</a></li>
+                <li><a href="#services" data-en="Services" data-ar="الخدمات">Services</a></li>
+                <li><a href="#about" data-en="About" data-ar="عن الشركة">About</a></li>
+                <li><a href="#timeline" data-en="History" data-ar="تاريخنا">History</a></li>
+                <li><a href="#cases" data-en="Projects" data-ar="المشاريع">Projects</a></li>
+                <li><a href="#faq" data-en="FAQ" data-ar="الأسئلة">FAQ</a></li>
+                <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+            </ul>
+
+            <div class="nav-btns">
+                <a href="#callback" class="btn btn-outline" data-en="Request Call" data-ar="طلب اتصال">
+                    <i class="fas fa-phone"></i> <span>Request Call</span>
+                </a>
+                <a href="#" class="btn btn-purple">
+                    <i class="fas fa-search"></i> <span data-en="Track" data-ar="تتبع">Track</span>
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>    <style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2744 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920') center/cover;
+            opacity: 0.15;
+            animation: zoomBg 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoomBg {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatParticle 20s infinite;
+        }
+
+        .particle:nth-child(odd) {
+            background: var(--purple);
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0;
+            }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { 
+                transform: translateY(-100px) rotate(720deg); 
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding: 100px 0;
+        }
+
+        .hero-text {
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(124,58,237,0.2);
+            border: 1px solid rgba(124,58,237,0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: var(--purple-light);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-title .gold { color: var(--gold); }
+        .hero-title .purple { color: var(--purple-light); }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 40px;
+            max-width: 520px;
+            line-height: 1.9;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            animation: fadeInUp 0.8s ease 0.8s backwards;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+        }
+
+        .hero-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 45px;
+            color: white;
+            animation: fadeInRight 1s ease 0.5s backwards;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-card h3 i {
+            color: var(--gold);
+            font-size: 1.8rem;
+        }
+
+        .track-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .track-input {
+            position: relative;
+        }
+
+        .track-input input {
+            width: 100%;
+            padding: 18px 18px 18px 55px;
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .track-input input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .track-input input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .track-input i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+        }
+
+        .regions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .region {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .region:hover {
+            background: rgba(124,58,237,0.2);
+            border-color: rgba(124,58,237,0.3);
+            transform: translateX(5px);
+        }
+
+        .region i {
+            color: var(--gold);
+        }
+
+        /* Services Comparison Section */
+        .comparison {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(124,58,237,0.1);
+            color: var(--purple);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title .gold { color: var(--gold); }
+        .section-title .purple { color: var(--purple); }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .comparison-table th {
+            padding: 25px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .comparison-table th:first-child {
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .comparison-table th i {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .comparison-table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(124,58,237,0.05);
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .comparison-table td:first-child {
+            text-align: left;
+            padding-left: 30px;
+            font-weight: 600;
+        }
+
+        .comparison-table .check {
+            color: var(--success);
+            font-size: 1.3rem;
+        }
+
+        .comparison-table .cross {
+            color: var(--danger);
+            font-size: 1.3rem;
+        }
+
+        .comparison-table .highlight-col {
+            background: rgba(124,58,237,0.08);
+            position: relative;
+        }
+
+        .comparison-table thead .highlight-col::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--purple);
+        }
+
+        .price-tag span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <i class="fas fa-globe-americas"></i>
+                        <span data-en="Global Logistics Leader Since 2009" data-ar="رائدون في الخدمات اللوجستية منذ 2009">Global Logistics Leader Since 2009</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span data-en="International Express" data-ar="الشحن السريع">International Express</span><br>
+                        <span class="gold" data-en="Freight" data-ar="الدولي">Freight</span> & 
+                        <span class="purple" data-en="Logistics" data-ar="واللوجستيات">Logistics</span>
+                    </h1>
+                    <p class="hero-desc" data-en="Smart Shipping Services delivers world-class logistics solutions with an integrated network across the Middle East, Europe, and Far East. Fast, reliable, and secure shipping tailored to your needs." data-ar="خدمة الشحن الذكية تقدم حلول لوجستية عالمية المستوى مع شبكة متكاملة عبر الشرق الأوسط وأوروبا والشرق الأقصى. شحن سريع وموثوق وآمن مصمم لاحتياجاتك.">
+                        Smart Shipping Services delivers world-class logistics solutions with an integrated network across the Middle East, Europe, and Far East. Fast, reliable, and secure shipping tailored to your needs.
+                    </p>
+                    <div class="hero-btns">
+                        <a href="#services" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i> <span data-en="Explore Services" data-ar="استكشف الخدمات">Explore Services</span>
+                        </a>
+                        <a href="#callback" class="btn btn-purple">
+                            <i class="fas fa-paper-plane"></i> <span data-en="Get Quote" data-ar="احصل على عرض">Get Quote</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-num counter" data-target="15">0</div>
+                            <div class="stat-label" data-en="Years Experience" data-ar="سنة خبرة">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num counter" data-target="50">0</div>
+                            <div class="stat-label" data-en="Countries" data-ar="دولة">Countries</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num counter" data-target="200">0</div>
+                            <div class="stat-label" data-en="Partners" data-ar="شريك">Partners</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num counter" data-target="10000">0</div>
+                            <div class="stat-label" data-en="Shipments" data-ar="شحنة">Shipments</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <h3><i class="fas fa-shipping-fast"></i> <span data-en="Track Your Shipment" data-ar="تتبع شحنتك">Track Your Shipment</span></h3>
+                    <div class="track-form">
+                        <div class="track-input">
+                            <i class="fas fa-hashtag"></i>
+                            <input type="text" placeholder="Enter Tracking Number" data-placeholder-en="Enter Tracking Number" data-placeholder-ar="أدخل رقم التتبع">
+                        </div>
+                        <button class="btn btn-primary" style="width:100%; justify-content:center;">
+                            <i class="fas fa-search"></i> <span data-en="Track Now" data-ar="تتبع الآن">Track Now</span>
+                        </button>
+                    </div>
+                    <div class="regions">
+                        <div class="region"><i class="fas fa-map-marker-alt"></i> Damascus</div>
+                        <div class="region"><i class="fas fa-map-marker-alt"></i> Dubai</div>
+                        <div class="region"><i class="fas fa-map-marker-alt"></i> Jordan</div>
+                        <div class="region"><i class="fas fa-map-marker-alt"></i> Beirut</div>
+                        <div class="region"><i class="fas fa-map-marker-alt"></i> Far East</div>
+                        <div class="region"><i class="fas fa-map-marker-alt"></i> Europe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Comparison -->
+    <section class="comparison" id="compare">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-balance-scale"></i> <span data-en="Compare Services" data-ar="قارن الخدمات">Compare Services</span></div>
+                <h2 class="section-title" data-en="Service Comparison Table" data-ar="جدول مقارنة الخدمات">Service <span class="purple">Comparison</span> Table</h2>
+                <p class="section-desc" data-en="Choose the right shipping solution for your business needs" data-ar="اختر حل الشحن المناسب لاحتياجات عملك">Choose the right shipping solution for your business needs</p>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th data-en="Features" data-ar="الميزات">Features</th>
+                        <th>
+                            <i class="fas fa-ship"></i>
+                            <span data-en="Sea Freight" data-ar="الشحن البحري">Sea Freight</span>
+                        </th>
+                        <th class="highlight-col">
+                            <i class="fas fa-plane"></i>
+                            <span data-en="Air Freight" data-ar="الشحن الجوي">Air Freight</span>
+                        </th>
+                        <th>
+                            <i class="fas fa-truck"></i>
+                            <span data-en="Land Freight" data-ar="الشحن البري">Land Freight</span>
+                        </th>
+                        <th>
+                            <i class="fas fa-bolt"></i>
+                            <span data-en="Express" data-ar="السريع">Express</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-en="Delivery Speed" data-ar="سرعة التوصيل">Delivery Speed</td>
+                        <td>20-45 Days</td>
+                        <td class="highlight-col">3-7 Days</td>
+                        <td>5-15 Days</td>
+                        <td>1-3 Days</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Cost Efficiency" data-ar="كفاءة التكلفة">Cost Efficiency</td>
+                        <td><i class="fas fa-check check"></i> Best</td>
+                        <td class="highlight-col">Medium</td>
+                        <td><i class="fas fa-check check"></i> Good</td>
+                        <td>Premium</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Cargo Capacity" data-ar="سعة البضائع">Cargo Capacity</td>
+                        <td>Unlimited</td>
+                        <td class="highlight-col">Up to 100 Tons</td>
+                        <td>Up to 40 Tons</td>
+                        <td>Up to 500 Kg</td>
+                    </tr>
+                    <tr>
+                        <td data-en="Door to Door" data-ar="من الباب للباب">Door to Door</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td class="highlight-col"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                    </tr>
+                    <tr>
+                        <td data-en="Real-time Tracking" data-ar="التتبع المباشر">Real-time Tracking</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td class="highlight-col"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                    </tr>
+                    <tr>
+                        <td data-en="Insurance" data-ar="التأمين">Insurance</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td class="highlight-col"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                    </tr>
+                    <tr>
+                        <td data-en="Temperature Control" data-ar="التحكم بالحرارة">Temperature Control</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td class="highlight-col"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td data-en="Hazardous Goods" data-ar="البضائع الخطرة">Hazardous Goods</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td class="highlight-col"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-times cross"></i></td>
+                    </tr>
+                    <tr>
+                        <td data-en="Customs Clearance" data-ar="التخليص الجمركي">Customs Clearance</td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td class="highlight-col"><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                        <td><i class="fas fa-check check"></i></td>
+                    </tr>
+                    <tr>
+                        <td data-en="Starting Price" data-ar="السعر يبدأ من">Starting Price</td>
+                        <td><span class="price-tag">$500<span>/container</span></span></td>
+                        <td class="highlight-col"><span class="price-tag">$5<span>/kg</span></span></td>
+                        <td><span class="price-tag">$300<span>/shipment</span></span></td>
+                        <td><span class="price-tag">$50<span>/kg</span></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>    <style>
+        /* Timeline Section */
+        .timeline-section {
+            padding: 120px 0;
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 60px auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold), var(--purple));
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50px;
+            position: relative;
+            margin-bottom: 50px;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-left: 50px;
+            padding-right: 0;
+            margin-left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
+            position: relative;
+            transition: all 0.4s;
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(124,58,237,0.2);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--card-bg);
+            transform: rotate(45deg);
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -11px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -11px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, var(--gold), var(--purple));
+            border-radius: 50%;
+            border: 4px solid var(--bg-primary);
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -12px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -12px;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Partners Section */
+        .partners {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .partner-logo {
+            width: 180px;
+            height: 100px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124,58,237,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .partner-logo:hover::before {
+            left: 100%;
+        }
+
+        .partner-logo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(124,58,237,0.15);
+            border-color: var(--purple);
+        }
+
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .partner-logo:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .partner-placeholder {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .partner-logo:hover .partner-placeholder {
+            color: var(--purple);
+            opacity: 1;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 120px 0;
+            background: var(--bg-primary);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 10px 30px rgba(124,58,237,0.1);
+        }
+
+        .faq-item.active {
+            border-color: var(--purple);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(124,58,237,0.05);
+        }
+
+        .faq-question h4 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .faq-question h4 i {
+            color: var(--purple);
+            font-size: 1.2rem;
+        }
+
+        .faq-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            background: linear-gradient(135deg, var(--gold), #d97706);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 30px 25px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                padding-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 8px !important;
+                right: auto !important;
+            }
+
+            .timeline-content::before {
+                left: -11px !important;
+                right: auto !important;
+                border-right: none !important;
+                border-top: none !important;
+                border-left: 1px solid var(--border-color) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+            }
+        }
+    </style>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section" id="timeline">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-history"></i> <span data-en="Our Journey" data-ar="رحلتنا">Our Journey</span></div>
+                <h2 class="section-title" data-en="Company Timeline" data-ar="تاريخ الشركة">Company <span class="purple">Timeline</span></h2>
+                <p class="section-desc" data-en="15 years of excellence in global logistics" data-ar="15 عاماً من التميز في الخدمات اللوجستية العالمية">15 years of excellence in global logistics</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2009</span>
+                        <h3 data-en="Company Founded" data-ar="تأسيس الشركة">Company Founded</h3>
+                        <p data-en="Smart Shipping Services was established in Damascus Free Zone with a vision to revolutionize logistics in the Middle East." data-ar="تأسست خدمة الشحن الذكية في المنطقة الحرة بدمشق برؤية لتحويل الخدمات اللوجستية في الشرق الأوسط.">Smart Shipping Services was established in Damascus Free Zone with a vision to revolutionize logistics in the Middle East.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2012</span>
+                        <h3 data-en="Regional Expansion" data-ar="التوسع الإقليمي">Regional Expansion</h3>
+                        <p data-en="Opened offices in Beirut and Amman, establishing our first international network across the Levant region." data-ar="افتتحنا مكاتب في بيروت وعمان، وأنشأنا أول شبكة دولية لنا عبر منطقة الشام.">Opened offices in Beirut and Amman, establishing our first international network across the Levant region.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2015</span>
+                        <h3 data-en="Gulf Partnership" data-ar="شراكة الخليج">Gulf Partnership</h3>
+                        <p data-en="Strategic partnership with major Gulf carriers, opening Dubai warehouse and expanding to UAE market." data-ar="شراكة استراتيجية مع كبار الناقلين في الخليج، افتتاح مستودع دبي والتوسع في سوق الإمارات.">Strategic partnership with major Gulf carriers, opening Dubai warehouse and expanding to UAE market.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2018</span>
+                        <h3 data-en="European Network" data-ar="الشبكة الأوروبية">European Network</h3>
+                        <p data-en="Established warehouses in Italy and Germany, connecting Middle East to European markets seamlessly." data-ar="أنشأنا مستودعات في إيطاليا وألمانيا، لربط الشرق الأوسط بالأسواق الأوروبية بسلاسة.">Established warehouses in Italy and Germany, connecting Middle East to European markets seamlessly.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2021</span>
+                        <h3 data-en="Far East Expansion" data-ar="التوسع نحو الشرق الأقصى">Far East Expansion</h3>
+                        <p data-en="Opened operations in China with dedicated warehouse in Shanghai, completing our global network." data-ar="افتتحنا عمليات في الصين مع مستودع مخصص في شنغهاي، لإكمال شبكتنا العالمية.">Opened operations in China with dedicated warehouse in Shanghai, completing our global network.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2024</span>
+                        <h3 data-en="Digital Transformation" data-ar="التحول الرقمي">Digital Transformation</h3>
+                        <p data-en="Launched advanced tracking platform and AI-powered logistics solutions, serving 50+ countries worldwide." data-ar="أطلقنا منصة تتبع متقدمة وحلول لوجستية مدعومة بالذكاء الاصطناعي، نخدم أكثر من 50 دولة حول العالم.">Launched advanced tracking platform and AI-powered logistics solutions, serving 50+ countries worldwide.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners" id="partners">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-handshake"></i> <span data-en="Our Partners" data-ar="شركاؤنا">Our Partners</span></div>
+                <h2 class="section-title" data-en="Trusted Partners & Clients" data-ar="شركاء وعملاء موثوقون">Trusted <span class="gold">Partners</span> & Clients</h2>
+                <p class="section-desc" data-en="Working with world-class companies to deliver excellence" data-ar="نعمل مع شركات عالمية لتقديم التميز">Working with world-class companies to deliver excellence</p>
+            </div>
+
+            <div class="partners-grid">
+                <div class="partner-logo"><span class="partner-placeholder">MAERSK</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">DHL</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">FedEx</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">MSC</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">Emirates</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">Hapag</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">CMA CGM</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">Evergreen</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">Lufthansa</span></div>
+                <div class="partner-logo"><span class="partner-placeholder">Turkish</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-question-circle"></i> <span data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</span></div>
+                <h2 class="section-title" data-en="Frequently Asked Questions" data-ar="الأسئلة الشائعة">Frequently Asked <span class="purple">Questions</span></h2>
+                <p class="section-desc" data-en="Find answers to common questions about our services" data-ar="اعثر على إجابات للأسئلة الشائعة حول خدماتنا">Find answers to common questions about our services</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-shipping-fast"></i> <span data-en="How long does international shipping take?" data-ar="كم يستغرق الشحن الدولي؟">How long does international shipping take?</span></h4>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-en="Shipping times vary by service: Sea Freight takes 20-45 days, Air Freight 3-7 days, Land Freight 5-15 days, and Express 1-3 days. Exact times depend on origin, destination, and customs processing." data-ar="تختلف أوقات الشحن حسب الخدمة: الشحن البحري يستغرق 20-45 يوماً، الشحن الجوي 3-7 أيام، الشحن البري 5-15 يوماً، والسريع 1-3 أيام. الأوقات الدقيقة تعتمد على المصدر والوجهة ومعالجة الجمارك.">
+                            Shipping times vary by service: Sea Freight takes 20-45 days, Air Freight 3-7 days, Land Freight 5-15 days, and Express 1-3 days. Exact times depend on origin, destination, and customs processing.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-box"></i> <span data-en="What items can I ship internationally?" data-ar="ما هي العناصر التي يمكنني شحنها دولياً؟">What items can I ship internationally?</span></h4>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-en="We can ship most commercial goods including electronics, textiles, machinery, food products, and more. We also handle hazardous materials (DGR) with proper certification. Some items may be restricted based on destination country regulations." data-ar="يمكننا شحن معظم البضائع التجارية بما في ذلك الإلكترونيات والمنسوجات والآلات والمنتجات الغذائية وغيرها. نتعامل أيضاً مع المواد الخطرة (DGR) مع الشهادات المناسبة. قد تكون بعض العناصر مقيدة بناءً على لوائح بلد الوجهة.">
+                            We can ship most commercial goods including electronics, textiles, machinery, food products, and more. We also handle hazardous materials (DGR) with proper certification. Some items may be restricted based on destination country regulations.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-file-invoice"></i> <span data-en="Do you handle customs clearance?" data-ar="هل تتعاملون مع التخليص الجمركي؟">Do you handle customs clearance?</span></h4>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-en="Yes! We provide complete customs clearance services at all major ports including Lattakia, Tartous, Beirut, and Aqaba. Our experienced team handles all documentation, duty calculations, and regulatory compliance to ensure smooth clearance." data-ar="نعم! نقدم خدمات تخليص جمركي كاملة في جميع الموانئ الرئيسية بما في ذلك اللاذقية وطرطوس وبيروت والعقبة. فريقنا ذو الخبرة يتعامل مع جميع الوثائق وحسابات الرسوم والامتثال التنظيمي لضمان التخليص السلس.">
+                            Yes! We provide complete customs clearance services at all major ports including Lattakia, Tartous, Beirut, and Aqaba. Our experienced team handles all documentation, duty calculations, and regulatory compliance to ensure smooth clearance.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-shield-alt"></i> <span data-en="Is my cargo insured?" data-ar="هل بضاعتي مؤمنة؟">Is my cargo insured?</span></h4>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-en="We offer comprehensive cargo insurance options for all shipments. Basic coverage is included, and you can opt for full-value insurance for complete protection. Our insurance partners cover loss, damage, and delays." data-ar="نقدم خيارات تأمين شاملة للبضائع لجميع الشحنات. التغطية الأساسية مشمولة، ويمكنك اختيار التأمين بالقيمة الكاملة للحماية الكاملة. شركاء التأمين لدينا يغطون الخسارة والضرر والتأخير.">
+                            We offer comprehensive cargo insurance options for all shipments. Basic coverage is included, and you can opt for full-value insurance for complete protection. Our insurance partners cover loss, damage, and delays.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-dollar-sign"></i> <span data-en="How do I get a shipping quote?" data-ar="كيف أحصل على عرض سعر للشحن؟">How do I get a shipping quote?</span></h4>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-en="Getting a quote is easy! Fill out our online request form, call us at 011-2158820, or send an email. We need your cargo details (weight, dimensions, type), origin, destination, and preferred shipping method to provide an accurate quote within 24 hours." data-ar="الحصول على عرض سعر سهل! املأ نموذج الطلب عبر الإنترنت، أو اتصل بنا على 011-2158820، أو أرسل بريداً إلكترونياً. نحتاج تفاصيل البضاعة (الوزن والأبعاد والنوع) والمصدر والوجهة وطريقة الشحن المفضلة لتقديم عرض سعر دقيق خلال 24 ساعة.">
+                            Getting a quote is easy! Fill out our online request form, call us at 011-2158820, or send an email. We need your cargo details (weight, dimensions, type), origin, destination, and preferred shipping method to provide an accurate quote within 24 hours.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-map-marked-alt"></i> <span data-en="Can I track my shipment?" data-ar="هل يمكنني تتبع شحنتي؟">Can I track my shipment?</span></h4>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content" data-en="Absolutely! Every shipment gets a unique tracking number. Use our online tracking system or mobile app to monitor your cargo in real-time. You'll receive automatic notifications at key milestones including pickup, departure, arrival, and delivery." data-ar="بالتأكيد! كل شحنة تحصل على رقم تتبع فريد. استخدم نظام التتبع عبر الإنترنت أو تطبيق الهاتف لمراقبة بضائعك في الوقت الفعلي. ستتلقى إشعارات تلقائية في المراحل الرئيسية بما في ذلك الاستلام والمغادرة والوصول والتسليم.">
+                            Absolutely! Every shipment gets a unique tracking number. Use our online tracking system or mobile app to monitor your cargo in real-time. You'll receive automatic notifications at key milestones including pickup, departure, arrival, and delivery.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <style>
+        /* Case Studies Section */
+        .cases {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .case-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            border: 1px solid var(--border-color);
+        }
+
+        .case-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(124,58,237,0.2);
+        }
+
+        .case-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .case-card:hover .case-image img {
+            transform: scale(1.1);
+        }
+
+        .case-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .case-content {
+            padding: 30px;
+        }
+
+        .case-title {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .case-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .case-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .case-stat {
+            text-align: center;
+        }
+
+        .case-stat-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--purple);
+        }
+
+        .case-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Callback Section */
+        .callback {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary), #1a2744);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .callback::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237C3AED' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .callback-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .callback-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .callback-text h2 span {
+            color: var(--gold);
+        }
+
+        .callback-text p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .callback-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .callback-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            border-radius: 50px;
+        }
+
+        .callback-feature i {
+            color: var(--gold);
+        }
+
+        .callback-form {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 50px;
+        }
+
+        .callback-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* World Map Section */
+        .world-map {
+            padding: 120px 0;
+            background: var(--bg-primary);
+        }
+
+        .map-container {
+            position: relative;
+            margin-top: 60px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .world-map-svg {
+            width: 100%;
+            height: 500px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Equirectangular-projection.jpg/1280px-Equirectangular-projection.jpg') center/contain no-repeat;
+            border-radius: 20px;
+            position: relative;
+            filter: grayscale(30%);
+        }
+
+        [data-theme="dark"] .world-map-svg {
+            filter: grayscale(50%) brightness(0.6);
+        }
+
+        .map-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        .map-point::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(245,158,11,0.3);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .map-point:hover {
+            transform: scale(1.3);
+            background: var(--purple);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        .map-point .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .map-point:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Map Points Positions */
+        .point-damascus { top: 38%; left: 52%; }
+        .point-beirut { top: 37%; left: 51%; }
+        .point-amman { top: 40%; left: 52%; }
+        .point-dubai { top: 44%; left: 58%; }
+        .point-china { top: 38%; left: 78%; }
+        .point-germany { top: 28%; left: 47%; }
+        .point-italy { top: 33%; left: 47%; }
+
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.warehouse {
+            background: var(--gold);
+        }
+
+        .legend-dot.office {
+            background: var(--purple);
+        }
+
+        .legend-dot.partner {
+            background: var(--success);
+        }
+
+        /* Before After Comparison */
+        .before-after {
+            padding: 120px 0;
+            background: var(--bg-secondary);
+        }
+
+        .ba-container {
+            max-width: 900px;
+            margin: 60px auto 0;
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .ba-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .ba-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ba-image.before {
+            clip-path: inset(0 50% 0 0);
+        }
+
+        .ba-slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 100%;
+            background: white;
+            cursor: ew-resize;
+            z-index: 10;
+        }
+
+        .ba-slider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .ba-slider::after {
+            content: '⟷';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .ba-label {
+            position: absolute;
+            bottom: 30px;
+            padding: 12px 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .ba-label.before-label {
+            left: 30px;
+        }
+
+        .ba-label.after-label {
+            right: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .callback-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: span 1;
+            }
+
+            .ba-wrapper {
+                height: 350px;
+            }
+        }
+    </style>
+
+    <!-- Case Studies Section -->
+    <section class="cases" id="cases">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-trophy"></i> <span data-en="Success Stories" data-ar="قصص النجاح">Success Stories</span></div>
+                <h2 class="section-title" data-en="Case Studies & Projects" data-ar="دراسات الحالة والمشاريع">Case Studies & <span class="purple">Projects</span></h2>
+                <p class="section-desc" data-en="Real results from real clients across the globe" data-ar="نتائج حقيقية من عملاء حقيقيين حول العالم">Real results from real clients across the globe</p>
+            </div>
+
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600" alt="Case Study">
+                        <span class="case-badge">Sea Freight</span>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title" data-en="Medical Equipment to Europe" data-ar="معدات طبية إلى أوروبا">Medical Equipment to Europe</h3>
+                        <p class="case-desc" data-en="Shipped 500 tons of medical equipment from China to Germany with temperature-controlled containers, completing delivery 5 days ahead of schedule." data-ar="شحنا 500 طن من المعدات الطبية من الصين إلى ألمانيا بحاويات مبردة، وأكملنا التسليم قبل 5 أيام من الموعد المحدد.">
+                            Shipped 500 tons of medical equipment from China to Germany with temperature-controlled containers, completing delivery 5 days ahead of schedule.
+                        </p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-stat-num">500</div>
+                                <div class="case-stat-label">Tons</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-num">25</div>
+                                <div class="case-stat-label">Days</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-num">100%</div>
+                                <div class="case-stat-label">Safe</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600" alt="Case Study">
+                        <span class="case-badge">Air Freight</span>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title" data-en="Emergency Pharma Delivery" data-ar="توصيل أدوية طارئ">Emergency Pharma Delivery</h3>
+                        <p class="case-desc" data-en="Urgent delivery of pharmaceutical products from Switzerland to Damascus in 48 hours, maintaining cold chain throughout the journey." data-ar="توصيل عاجل للمنتجات الصيدلانية من سويسرا إلى دمشق في 48 ساعة، مع الحفاظ على سلسلة التبريد طوال الرحلة.">
+                            Urgent delivery of pharmaceutical products from Switzerland to Damascus in 48 hours, maintaining cold chain throughout the journey.
+                        </p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-stat-num">2</div>
+                                <div class="case-stat-label">Tons</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-num">48</div>
+                                <div class="case-stat-label">Hours</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-num">-20°C</div>
+                                <div class="case-stat-label">Temp</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600" alt="Case Study">
+                        <span class="case-badge">Land Freight</span>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title" data-en="Construction Materials Project" data-ar="مشروع مواد البناء">Construction Materials Project</h3>
+                        <p class="case-desc" data-en="Transported 10,000 tons of construction materials from Jordan to Damascus for a major infrastructure project, with 50 trucks operating daily." data-ar="نقلنا 10,000 طن من مواد البناء من الأردن إلى دمشق لمشروع بنية تحتية كبير، مع تشغيل 50 شاحنة يومياً.">
+                            Transported 10,000 tons of construction materials from Jordan to Damascus for a major infrastructure project, with 50 trucks operating daily.
+                        </p>
+                        <div class="case-stats">
+                            <div class="case-stat">
+                                <div class="case-stat-num">10K</div>
+                                <div class="case-stat-label">Tons</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-num">50</div>
+                                <div class="case-stat-label">Trucks</div>
+                            </div>
+                            <div class="case-stat">
+                                <div class="case-stat-num">30</div>
+                                <div class="case-stat-label">Days</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request Callback Section -->
+    <section class="callback" id="callback">
+        <div class="container">
+            <div class="callback-content">
+                <div class="callback-text">
+                    <h2 data-en="Request a Callback" data-ar="طلب اتصال"><span>Request</span> a Callback</h2>
+                    <p data-en="Fill out the form and our logistics experts will call you back within 30 minutes during business hours. Get personalized solutions for your shipping needs." data-ar="املأ النموذج وسيقوم خبراء الخدمات اللوجستية لدينا بالاتصال بك خلال 30 دقيقة خلال ساعات العمل. احصل على حلول مخصصة لاحتياجات الشحن الخاصة بك.">
+                        Fill out the form and our logistics experts will call you back within 30 minutes during business hours. Get personalized solutions for your shipping needs.
+                    </p>
+                    <div class="callback-features">
+                        <div class="callback-feature"><i class="fas fa-check"></i> <span data-en="Free Consultation" data-ar="استشارة مجانية">Free Consultation</span></div>
+                        <div class="callback-feature"><i class="fas fa-check"></i> <span data-en="Expert Advice" data-ar="نصيحة خبير">Expert Advice</span></div>
+                        <div class="callback-feature"><i class="fas fa-check"></i> <span data-en="Quick Response" data-ar="استجابة سريعة">Quick Response</span></div>
+                        <div class="callback-feature"><i class="fas fa-check"></i> <span data-en="Custom Solutions" data-ar="حلول مخصصة">Custom Solutions</span></div>
+                    </div>
+                </div>
+
+                <div class="callback-form">
+                    <h3 data-en="Get a Call Back" data-ar="احصل على اتصال">Get a Call Back</h3>
+                    <form id="callbackForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-en="Full Name" data-ar="الاسم الكامل">Full Name *</label>
+                                <input type="text" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-en="Phone Number" data-ar="رقم الهاتف">Phone Number *</label>
+                                <input type="tel" placeholder="+963 XXX XXX XXX" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+                                <input type="email" placeholder="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label data-en="Preferred Time" data-ar="الوقت المفضل">Preferred Time</label>
+                                <select>
+                                    <option value="" data-en="Select Time" data-ar="اختر الوقت">Select Time</option>
+                                    <option>Morning (8AM - 12PM)</option>
+                                    <option>Afternoon (12PM - 4PM)</option>
+                                    <option>Evening (4PM - 6PM)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group full">
+                            <label data-en="Service Needed" data-ar="الخدمة المطلوبة">Service Needed</label>
+                            <select>
+                                <option value="" data-en="Select Service" data-ar="اختر الخدمة">Select Service</option>
+                                <option>Sea Freight</option>
+                                <option>Air Freight</option>
+                                <option>Land Freight</option>
+                                <option>Customs Clearance</option>
+                                <option>Warehousing</option>
+                                <option>Express Delivery</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label data-en="Message (Optional)" data-ar="رسالة (اختياري)">Message (Optional)</label>
+                            <textarea rows="3" placeholder="Tell us about your shipping needs..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-phone"></i> <span data-en="Request Callback" data-ar="طلب اتصال">Request Callback</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- World Map Section -->
+    <section class="world-map" id="map">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-globe"></i> <span data-en="Global Network" data-ar="الشبكة العالمية">Global Network</span></div>
+                <h2 class="section-title" data-en="Interactive World Map" data-ar="خريطة العالم التفاعلية">Interactive <span class="purple">World Map</span></h2>
+                <p class="section-desc" data-en="Explore our global presence and logistics network" data-ar="استكشف تواجدنا العالمي وشبكتنا اللوجستية">Explore our global presence and logistics network</p>
+            </div>
+
+            <div class="map-container">
+                <div class="world-map-svg">
+                    <div class="map-point point-damascus">
+                        <span class="tooltip">Damascus - HQ</span>
+                    </div>
+                    <div class="map-point point-beirut">
+                        <span class="tooltip">Beirut Office</span>
+                    </div>
+                    <div class="map-point point-amman">
+                        <span class="tooltip">Amman Office</span>
+                    </div>
+                    <div class="map-point point-dubai">
+                        <span class="tooltip">Dubai Warehouse</span>
+                    </div>
+                    <div class="map-point point-china">
+                        <span class="tooltip">Shanghai Warehouse</span>
+                    </div>
+                    <div class="map-point point-germany">
+                        <span class="tooltip">Hamburg Warehouse</span>
+                    </div>
+                    <div class="map-point point-italy">
+                        <span class="tooltip">Milan Warehouse</span>
+                    </div>
+                </div>
+
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot warehouse"></div>
+                        <span data-en="Warehouse" data-ar="مستودع">Warehouse</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot office"></div>
+                        <span data-en="Office" data-ar="مكتب">Office</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot partner"></div>
+                        <span data-en="Partner Network" data-ar="شبكة الشركاء">Partner Network</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before After Section -->
+    <section class="before-after">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-exchange-alt"></i> <span data-en="Transformation" data-ar="التحول">Transformation</span></div>
+                <h2 class="section-title" data-en="Before & After Smart Shipping" data-ar="قبل وبعد الشحن الذكي">Before & After <span class="gold">Smart Shipping</span></h2>
+                <p class="section-desc" data-en="See the difference our logistics solutions make" data-ar="شاهد الفرق الذي تحدثه حلولنا اللوجستية">See the difference our logistics solutions make</p>
+            </div>
+
+            <div class="ba-container">
+                <div class="ba-wrapper" id="baWrapper">
+                    <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200" alt="Before" class="ba-image before">
+                    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200" alt="After" class="ba-image after">
+                    <div class="ba-slider" id="baSlider"></div>
+                    <span class="ba-label before-label" data-en="Before" data-ar="قبل">Before</span>
+                    <span class="ba-label after-label" data-en="After" data-ar="بعد">After</span>
+                </div>
+            </div>
+        </div>
+    </section>    <style>
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: var(--bg-primary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, var(--primary), #1a2744);
+            border-radius: 30px;
+            padding: 50px;
+            color: white;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info > p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 20px;
+        }
+
+        .contact-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(124,58,237,0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--gold);
+        }
+
+        .contact-icon i {
+            font-size: 1.3rem;
+            color: var(--purple-light);
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover .contact-icon i {
+            color: var(--primary);
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-item p, .contact-item a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--gold);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-social a:hover {
+            background: var(--gold);
+            transform: translateY(-3px) rotate(5deg);
+        }
+
+        .contact-form-box {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-form-box h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+        }
+
+        .contact-form-box .form-group input,
+        .contact-form-box .form-group textarea,
+        .contact-form-box .form-group select {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .contact-form-box .form-group input:focus,
+        .contact-form-box .form-group textarea:focus,
+        .contact-form-box .form-group select:focus {
+            border-color: var(--purple);
+            background: var(--bg-primary);
+        }
+
+        .contact-form-box .form-group label {
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 100px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 25px;
+        }
+
+        .footer-brand .logo .logo-text h1,
+        .footer-brand .logo .logo-text span {
+            color: white;
+        }
+
+        .footer-brand .logo .logo-text span {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: linear-gradient(135deg, var(--gold), var(--purple));
+            transform: translateY(-3px) rotate(5deg);
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .footer-links i {
+            font-size: 0.7rem;
+            color: var(--purple-light);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-bottom a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* WhatsApp & Scroll Top */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 5px 25px rgba(37,211,102,0.4);
+            z-index: 999;
+            transition: all 0.3s;
+            animation: whatsappPulse 2s infinite;
+        }
+
+        @keyframes whatsappPulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(37,211,102,0.4); }
+            50% { box-shadow: 0 5px 40px rgba(37,211,102,0.6); }
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 110px;
+            right: 38px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(124,58,237,0.3);
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge"><i class="fas fa-envelope"></i> <span data-en="Contact Us" data-ar="اتصل بنا">Contact Us</span></div>
+                <h2 class="section-title" data-en="Get In Touch" data-ar="تواصل معنا">Get In <span class="purple">Touch</span></h2>
+                <p class="section-desc" data-en="Our team is ready to help with all your logistics needs" data-ar="فريقنا جاهز لمساعدتك في جميع احتياجاتك اللوجستية">Our team is ready to help with all your logistics needs</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 data-en="Contact Information" data-ar="معلومات الاتصال">Contact Information</h3>
+                    <p data-en="Fill up the form and our team will get back to you within 24 hours." data-ar="املأ النموذج وسيتواصل معك فريقنا خلال 24 ساعة.">Fill up the form and our team will get back to you within 24 hours.</p>
+
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div>
+                                <h4 data-en="Phone" data-ar="الهاتف">Phone</h4>
+                                <a href="tel:011-2158810">011-2158810</a><br>
+                                <a href="tel:011-2158820">011-2158820</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4 data-en="Email" data-ar="البريد الإلكتروني">Email</h4>
+                                <a href="mailto:info@smartshipping.sy">info@smartshipping.sy</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4 data-en="Location" data-ar="الموقع">Location</h4>
+                                <p data-en="Damascus – Free Zone, Syria" data-ar="دمشق - المنطقة الحرة، سوريا">Damascus – Free Zone, Syria</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4 data-en="Working Hours" data-ar="ساعات العمل">Working Hours</h4>
+                                <p data-en="Sat - Thu: 8:00 AM - 6:00 PM" data-ar="السبت - الخميس: 8:00 ص - 6:00 م">Sat - Thu: 8:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form-box">
+                    <h3 data-en="Send us a Message" data-ar="أرسل لنا رسالة">Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-en="First Name" data-ar="الاسم الأول">First Name *</label>
+                                <input type="text" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-en="Last Name" data-ar="اسم العائلة">Last Name *</label>
+                                <input type="text" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-en="Email" data-ar="البريد الإلكتروني">Email *</label>
+                                <input type="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-en="Phone" data-ar="الهاتف">Phone</label>
+                                <input type="tel" placeholder="+963 XXX XXX XXX">
+                            </div>
+                        </div>
+                        <div class="form-group full">
+                            <label data-en="Service" data-ar="الخدمة">Service</label>
+                            <select>
+                                <option value="">Select Service</option>
+                                <option>Sea Freight</option>
+                                <option>Air Freight</option>
+                                <option>Land Freight</option>
+                                <option>Customs Clearance</option>
+                                <option>Warehousing</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label data-en="Message" data-ar="الرسالة">Message</label>
+                            <textarea rows="4" placeholder="Your message..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-purple" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-paper-plane"></i> <span data-en="Send Message" data-ar="إرسال الرسالة">Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <span class="s1">S</span><span class="s2">S</span>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Smart Shipping</h1>
+                            <span>INTERNATIONAL FREIGHT & LOGISTICS</span>
+                        </div>
+                    </a>
+                    <p data-en="Smart Shipping Services is a global leader in international transport & logistics, delivering value through fast and reliable services." data-ar="خدمة الشحن الذكية هي رائدة عالمية في النقل الدولي والخدمات اللوجستية، تقدم قيمة من خلال خدمات سريعة وموثوقة.">Smart Shipping Services is a global leader in international transport & logistics, delivering value through fast and reliable services.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-en="Services" data-ar="الخدمات">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Sea Freight</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Air Freight</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Land Freight</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Customs</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Warehousing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-en="Quick Links" data-ar="روابط سريعة">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#cases"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-en="Contact" data-ar="اتصل">Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Damascus – Free Zone</li>
+                        <li><a href="tel:011-2158820"><i class="fas fa-phone"></i> 011-2158820</a></li>
+                        <li><a href="mailto:info@smartshipping.sy"><i class="fas fa-envelope"></i> info@smartshipping.sy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 <a href="#">Smart Shipping Services</a>. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/963112158820" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll Top -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // ========== PRELOADER ==========
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+            }, 2000);
+        });
+
+        // ========== CUSTOM CURSOR ==========
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursorFollower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        document.querySelectorAll('a, button, .btn, .service-card, .case-card, .faq-item').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        document.addEventListener('mousedown', () => cursor.classList.add('click'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('click'));
+
+        // ========== SCROLL PROGRESS ==========
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+
+            // Scroll Top Button
+            if (scrollTop > 500) {
+                document.getElementById('scrollTop').classList.add('show');
+            } else {
+                document.getElementById('scrollTop').classList.remove('show');
+            }
+        });
+
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ========== MENU TOGGLE ==========
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('navMenu').classList.remove('active');
+                }
+            });
+        });
+
+        // ========== DARK MODE TOGGLE ==========
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // ========== LANGUAGE TOGGLE ==========
+        let currentLang = 'en';
+        const langToggle = document.getElementById('langToggle');
+        
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.body.classList.toggle('ar', currentLang === 'ar');
+            langToggle.innerHTML = currentLang === 'en' ? '<span>AR</span>' : '<span>EN</span>';
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+                el.placeholder = el.getAttribute(`data-placeholder-${currentLang}`);
+            });
+        });
+
+        // ========== FAQ ACCORDION ==========
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // ========== COUNTER ANIMATION ==========
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current) + '+';
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target + '+';
+                        }
+                    };
+                    updateCounter();
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // ========== BEFORE/AFTER SLIDER ==========
+        const baSlider = document.getElementById('baSlider');
+        const baWrapper = document.getElementById('baWrapper');
+        let isDragging = false;
+
+        if (baSlider && baWrapper) {
+            const updateSlider = (x) => {
+                const rect = baWrapper.getBoundingClientRect();
+                let pos = ((x - rect.left) / rect.width) * 100;
+                pos = Math.max(0, Math.min(100, pos));
+                baSlider.style.left = pos + '%';
+                document.querySelector('.ba-image.before').style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
+            };
+
+            baSlider.addEventListener('mousedown', () => isDragging = true);
+            document.addEventListener('mouseup', () => isDragging = false);
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) updateSlider(e.clientX);
+            });
+
+            baSlider.addEventListener('touchstart', () => isDragging = true);
+            document.addEventListener('touchend', () => isDragging = false);
+            document.addEventListener('touchmove', (e) => {
+                if (isDragging) updateSlider(e.touches[0].clientX);
+            });
+        }
+
+        // ========== FORM SUBMISSIONS ==========
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you! Your message has been sent successfully.');
+                form.reset();
+            });
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-card, .case-card, .timeline-item, .network-card, .partner-logo, .faq-item, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            animateOnScroll.observe(el);
+        });
+
+        // ========== PARTICLES ANIMATION ==========
+        document.querySelectorAll('.particle').forEach((particle, index) => {
+            particle.style.left = (Math.random() * 100) + '%';
+            particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+            particle.style.animationDelay = (Math.random() * 10) + 's';
+            particle.style.width = (5 + Math.random() * 10) + 'px';
+            particle.style.height = particle.style.width;
+        });
+    </script>
+</body>
+</html>
